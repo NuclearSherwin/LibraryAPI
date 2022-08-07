@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TuHo3p4rc2MDx6+V7L3fd2RbJ7qFB5SwSIo3XZ1gEkFWgbz8ZK2Ba+XDuuOVKZzeno99i1D0ox/lny36ZD1i5g==",
+  "dgSpecHash": "5WaT9DqYt8JYfWaWlZr5oFK9c1BnSyXF9+8cFbZ94oASaMLJi5NUwnyf3HCQP8KjTAL7WfVv2meYHodckRiQUA==",
   "success": true,
-  "projectFilePath": "E:\\c#-projects\\Libary\\Libary.csproj",
+  "projectFilePath": "E:\\c#-projects\\Library\\Libary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phong\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\phong\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

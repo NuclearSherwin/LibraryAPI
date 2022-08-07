@@ -198,11 +198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\c#-projects\\Libary\\Libary.csproj",
+      "projectUniqueName": "E:\\c#-projects\\Library\\Libary.csproj",
       "projectName": "Libary",
-      "projectPath": "E:\\c#-projects\\Libary\\Libary.csproj",
+      "projectPath": "E:\\c#-projects\\Library\\Libary.csproj",
       "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
-      "outputPath": "E:\\c#-projects\\Libary\\obj\\",
+      "outputPath": "E:\\c#-projects\\Library\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",

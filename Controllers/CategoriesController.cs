@@ -10,11 +10,11 @@ namespace Library.Controllers
     [Route("categories")]
     public class CategoriesController : ControllerBase
     {
-        private readonly InMemCategoriesRepository _categoriesRepository;
+        private readonly IInMemCategoriesRepository _categoriesRepository;
 
-        public CategoriesController()
+        public CategoriesController(IInMemCategoriesRepository categoriesRepository)
         {
-            _categoriesRepository = new InMemCategoriesRepository();
+            this._categoriesRepository = categoriesRepository;
         }
 
         // GET /categories
