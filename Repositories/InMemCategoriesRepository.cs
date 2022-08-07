@@ -14,6 +14,11 @@ namespace Library.Repositories
             new Category { Id = Guid.NewGuid(), Name = "Music", Description = "Songs, lyrics, MV, Singer", CreateDate = DateTimeOffset.UtcNow },
         };
 
+        public void CreateCategory(Category category)
+        {
+            _categories.Add(category);
+        }
+
         // GET ALL
         public IEnumerable<Category> getAll()
         {
@@ -25,6 +30,18 @@ namespace Library.Repositories
         public Category GetCategory(Guid id)
         {
             return _categories.FirstOrDefault(c => c.Id == id);
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            var categoryToUpdate = _categories.FindIndex(c => c.Id == category.Id);
+            _categories[categoryToUpdate] = category;
+        }
+
+        void IInMemCategoriesRepository.DeleteCategory(Guid id)
+        {
+            var index = _categories.FindIndex(c => c.Id == id);
+            _categories.RemoveAt(index);
         }
     }
 }

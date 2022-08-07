@@ -8,5 +8,9 @@ namespace Library.Repositories
     {
         IEnumerable<Category> getAll();
         Category GetCategory(Guid id);
+        void CreateCategory(Category category);
+
+        void UpdateCategory(Category category);
+        void DeleteCategory(Guid id);
     }
 }
