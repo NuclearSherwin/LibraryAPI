@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Libary.Entities;
+using Library.Entities;
+using Library.Repositories;
 
-namespace Libary.Repositories
+namespace Library.Repositories
 {
-    public class InMemCategoriesRepository
+    public class InMemCategoriesRepository : IInMemCategoriesRepository
     {
         private readonly List<Category> _categories = new() {
             new Category { Id = Guid.NewGuid(), Name = "Universe", Description = "Galaxy, Aliens, Things, Black hole", CreateDate = DateTimeOffset.UtcNow },
@@ -23,7 +24,7 @@ namespace Libary.Repositories
         // GET BY ID
         public Category GetCategory(Guid id)
         {
-            return _categories.Where(c => c.Id = id).SingleOrDefault();
+            return _categories.FirstOrDefault(c => c.Id == id);
         }
     }
 }

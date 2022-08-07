@@ -1,6 +1,6 @@
 using System;
 
-namespace Libary.Entities
+namespace Library.Entities
 {
     public record Category
     {
