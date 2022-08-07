@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Library.Dtos;
 using Library.Entities;
 using Library.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -19,15 +21,15 @@ namespace Library.Controllers
 
         // GET /categories
         [HttpGet]
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<CategoryDto> GetCategories()
         {
-            var categories = _categoriesRepository.getAll();
+            var categories = _categoriesRepository.getAll().Select(c => c.AsDto());
             return categories;
         }
 
         // GET /categories/{id}
         [HttpGet("{id}")]
-        public ActionResult<Category> getCategory(Guid id)
+        public ActionResult<CategoryDto> getCategory(Guid id)
         {
             var category = _categoriesRepository.GetCategory(id);
 
@@ -36,7 +38,7 @@ namespace Library.Controllers
                 return NotFound();
             }
 
-            return category;
+            return category.AsDto();
         }
     }
 }
