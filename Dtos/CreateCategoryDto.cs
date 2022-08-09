@@ -8,7 +8,6 @@ namespace Library.Dtos
         public string Name { get; init; }
 
         [Required]
-        [Range(0, 1000)]
         public string Description { get; init; }
     }
 }
