@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Library.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -21,32 +22,32 @@ namespace Library.Repositories
 
         }
 
-        public void CreateCategory(Category category)
+        public async Task CreateCategoryAsync(Category category)
         {
-            _categoriesCollection.InsertOne(category);
+            await _categoriesCollection.InsertOneAsync(category);
         }
 
-        public void DeleteCategory(Guid id)
-        {
-            var filter = _filterBuilder.Eq(category => category.Id, id);
-            _categoriesCollection.DeleteOne(filter);
-        }
-
-        public IEnumerable<Category> getAll()
-        {
-            return _categoriesCollection.Find(new BsonDocument()).ToList();
-        }
-
-        public Category GetCategory(Guid id)
+        public async Task DeleteCategoryAsync(Guid id)
         {
             var filter = _filterBuilder.Eq(category => category.Id, id);
-            return _categoriesCollection.Find(filter).FirstOrDefault();
+            await _categoriesCollection.DeleteOneAsync(filter);
         }
 
-        public void UpdateCategory(Category category)
+        public async Task<IEnumerable<Category>> getAllAsync()
+        {
+            return await _categoriesCollection.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async Task<Category> GetCategoryAsync(Guid id)
+        {
+            var filter = _filterBuilder.Eq(category => category.Id, id);
+            return await _categoriesCollection.Find(filter).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateCategoryAsync(Category category)
         {
             var filter = _filterBuilder.Eq(existingItem => existingItem.Id, category.Id);
-            _categoriesCollection.ReplaceOne(filter, category);
+            await _categoriesCollection.ReplaceOneAsync(filter, category);
         }
     }
 }

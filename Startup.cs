@@ -41,10 +41,13 @@ namespace Library
                 return new MongoClient(settings.ConnectionString);
             });
             services.AddSingleton<IInMemCategoriesRepository, MongoDbCategoriesRepository>();
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.SuppressAsyncSuffixInActionNames = false;
+            });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Libary", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library", Version = "v1" });
             });
         }
 

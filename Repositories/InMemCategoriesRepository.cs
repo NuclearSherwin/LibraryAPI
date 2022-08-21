@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Library.Entities;
 using Library.Repositories;
 
@@ -14,34 +15,38 @@ namespace Library.Repositories
             new Category { Id = Guid.NewGuid(), Name = "Music", Description = "Songs, lyrics, MV, Singer", CreateDate = DateTimeOffset.UtcNow },
         };
 
-        public void CreateCategory(Category category)
+        public async Task CreateCategoryAsync(Category category)
         {
             _categories.Add(category);
+            await Task.CompletedTask;
         }
 
         // GET ALL
-        public IEnumerable<Category> getAll()
+        public async Task<IEnumerable<Category>> getAllAsync()
         {
-            return _categories;
+            return await Task.FromResult(_categories);
         }
 
 
         // GET BY ID
-        public Category GetCategory(Guid id)
+        public async Task<Category> GetCategoryAsync(Guid id)
         {
-            return _categories.FirstOrDefault(c => c.Id == id);
+            var category = _categories.FirstOrDefault(c => c.Id == id);
+            return await Task.FromResult(category);
         }
 
-        public void UpdateCategory(Category category)
+        public async Task UpdateCategoryAsync(Category category)
         {
             var categoryToUpdate = _categories.FindIndex(c => c.Id == category.Id);
             _categories[categoryToUpdate] = category;
+            await Task.CompletedTask;
         }
 
-        void IInMemCategoriesRepository.DeleteCategory(Guid id)
+        public async Task DeleteCategoryAsync(Guid id)
         {
             var index = _categories.FindIndex(c => c.Id == id);
             _categories.RemoveAt(index);
+            await Task.CompletedTask;
         }
     }
 }

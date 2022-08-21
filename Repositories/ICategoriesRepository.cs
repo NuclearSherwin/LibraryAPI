@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Library.Entities;
 
 namespace Library.Repositories
 {
     public interface IInMemCategoriesRepository
     {
-        IEnumerable<Category> getAll();
-        Category GetCategory(Guid id);
-        void CreateCategory(Category category);
+        Task<IEnumerable<Category>> getAllAsync();
+        Task<Category> GetCategoryAsync(Guid id);
+        Task CreateCategoryAsync(Category category);
 
-        void UpdateCategory(Category category);
-        void DeleteCategory(Guid id);
+        Task UpdateCategoryAsync(Category category);
+        Task DeleteCategoryAsync(Guid id);
     }
 }

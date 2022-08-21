@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Library.Dtos;
 using Library.Entities;
 using Library.Repositories;
@@ -21,17 +22,18 @@ namespace Library.Controllers
 
         // GET /categories
         [HttpGet]
-        public IEnumerable<CategoryDto> GetCategories()
+        public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
         {
-            var categories = _categoriesRepository.getAll().Select(c => c.AsDto());
+            var categories = (await _categoriesRepository.getAllAsync())
+                              .Select(c => c.AsDto());
             return categories;
         }
 
         // GET /categories/{id}
         [HttpGet("{id}")]
-        public ActionResult<CategoryDto> getCategory(Guid id)
+        public async Task<ActionResult<CategoryDto>> getCategoryAsync(Guid id)
         {
-            var category = _categoriesRepository.GetCategory(id);
+            var category = await _categoriesRepository.GetCategoryAsync(id);
 
             if (category == null)
             {
@@ -44,7 +46,7 @@ namespace Library.Controllers
 
         // POST /categories
         [HttpPost]
-        public ActionResult<CategoryDto> CreateCategory(CreateCategoryDto categoryDto)
+        public async Task<ActionResult<CategoryDto>> CreateCategoryAsync(CreateCategoryDto categoryDto)
         {
             Category category = new()
             {
@@ -54,16 +56,16 @@ namespace Library.Controllers
                 CreateDate = DateTimeOffset.UtcNow
             };
 
-            _categoriesRepository.CreateCategory(category);
+            await _categoriesRepository.CreateCategoryAsync(category);
 
-            return CreatedAtAction(nameof(getCategory), new { id = category.Id }, category.AsDto());
+            return CreatedAtAction(nameof(getCategoryAsync), new { id = category.Id }, category.AsDto());
         }
 
         // UPDATE /categories/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateCategory(Guid id, CategoryDto categoryDto)
+        public async Task<ActionResult> UpdateCategoryAsync(Guid id, CategoryDto categoryDto)
         {
-            var exitsCategory = _categoriesRepository.GetCategory(id);
+            var exitsCategory = await _categoriesRepository.GetCategoryAsync(id);
             if (exitsCategory == null)
             {
                 return NotFound();
@@ -75,23 +77,23 @@ namespace Library.Controllers
                 Description = categoryDto.Description
             };
 
-            _categoriesRepository.UpdateCategory(updatedCategory);
+            await _categoriesRepository.UpdateCategoryAsync(updatedCategory);
 
             return NoContent();
         }
 
         // DELETE /categories/{id}
         [HttpDelete("{id}")]
-        public ActionResult DeleteCategory(Guid id)
+        public async Task<ActionResult> DeleteCategoryAsync(Guid id)
         {
-            var category = _categoriesRepository.GetCategory(id);
+            var category = await _categoriesRepository.GetCategoryAsync(id);
 
             if (category == null)
             {
                 return NotFound();
             }
 
-            _categoriesRepository.DeleteCategory(id);
+            await _categoriesRepository.DeleteCategoryAsync(id);
 
             return NoContent();
 
